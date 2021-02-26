@@ -1,1 +1,152 @@
-<p>pelicula works!</p>
+<h1 *ngIf="isAddMode">Agregar Pelicula</h1>
+<h1 *ngIf="!isAddMode">Actualizar Pelicula</h1>
+<br>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <div class="form-row">
+        <div class="form-group col-md-6 col-lg-6">
+            <label for="titulo">Titulo</label>
+            <input type="text" formControlName="titulo" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.titulo.errors }" />
+            <div *ngIf="submitted && f.titulo.errors" class="invalid-feedback">
+                <div *ngIf="f.titulo.errors.required">Campo requerido</div>
+                <div *ngIf="f.titulo.errors.maxlength">El titulo debe contener maximo 150 caracteres</div>
+                <div *ngIf="f.titulo.errors.pattern">Solo se permiten letras de a-z de 0-9 y ñ.-_()/%</div>
+            </div>
+        </div>
+        <div class="form-group col-md-6 col-lg-6">
+            <label for="descripcion">Descripción</label>
+            <input type="text" formControlName="descripcion" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.descripcion.errors }" />
+            <div *ngIf="submitted && f.descripcion.errors" class="invalid-feedback">
+                <div *ngIf="f.descripcion.errors.required">Campo requerido</div>
+                <div *ngIf="f.descripcion.errors.maxlength">La descripción debe contener maximo 500 caracteres</div>
+                <div *ngIf="f.descripcion.errors.pattern">Solo se permiten letras de a-z de 0-9 y ñ.-_()/%</div>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4 col-lg-4">
+            <label for="director">Director</label>
+            <input type="text" formControlName="director" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.director.errors }" />
+            <div *ngIf="submitted && f.director.errors" class="invalid-feedback">
+                <div *ngIf="f.director.errors.required">Campo requerido</div>
+                <div *ngIf="f.director.errors.maxlength">El Director debe contener maximo 70 caracteres</div>
+                <div *ngIf="f.director.errors.pattern">Solo se permiten letras de a-z de 0-9 y ñ.-_()/%</div>
+            </div>
+        </div>
+        <div class="form-group col">
+            <label for="costo">Costo</label>
+            <input type="text" formControlName="costo" class="form-control" maxlength="18" prefix="$"
+                mask="separator.2" thousandSeparator=","
+                [ngClass]="{ 'is-invalid': submitted && f.costo.errors }" />
+            <div *ngIf="submitted && f.costo.errors" class="invalid-feedback">
+                <div *ngIf="f.costo.errors.required">Campo requerido</div>
+                <div *ngIf="f.costo.errors.maxlength">Solo se permiten 15 digitos</div>
+                <div *ngIf="f.costo.errors.pattern">Solo se permiten números 0-9</div>
+            </div>
+        </div>
+        <div class="form-group col">
+            <label for="cantidad">Cantidad</label>
+            <input type="text" formControlName="cantidad" class="form-control" maxlength="8" thousandSeparator=","
+                [ngClass]="{ 'is-invalid': submitted && f.cantidad.errors }" />
+            <div *ngIf="submitted && f.cantidad.errors" class="invalid-feedback">
+                <div *ngIf="f.cantidad.errors.required">Campo requerido</div>
+                <div *ngIf="f.cantidad.errors.maxlength">Solo se permiten 8 digitos</div>
+                <div *ngIf="f.cantidad.errors.pattern">Solo se permiten números 0-9</div>
+            </div>
+        </div>
+    </div>
+
+    <h4 class="text-center"><span class="text-center badge badge-primary">Actores de la pelicula</span></h4>
+    <button type="button" class="btn btn-primary" title="Agregar nuevo Actor" (click)="AddNewActorAPelicula(dialogAddActores)"
+        [disabled]="loading">Agregar Actor <i class="fas fa-plus-circle"></i></button>
+
+    <table class="table table-sm table-striped table-bordered" style="margin-top: 8px;width: 70%;margin: 0 auto;">
+        <thead>
+            <tr>
+                <th class="text-center">Nombre</th>
+                <th class="text-center">Nacionalidad</th>
+                <th class="text-center">Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of actores">
+                <td>{{item.Nombre}}</td>
+                <td>{{item.Nacionalidad}}</td>
+                <td class="text-center">
+                    <button type="button"
+                        class="btn btn-sm btn-danger" [disabled]="loading" title="Quitar Actor">
+                        <i class="far fa-trash-alt"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+
+    <div class="form-group text-center">
+        <button [disabled]="loading" class="btn btn-success">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Guardar
+        </button>
+        <a routerLink="/peliculas" class="btn btn-outline-danger" style="margin-left: 8px;">Cancelar</a>
+    </div>
+</form>
+
+<!--Dialog agregar Actor a la Pelicula-->
+<ng-template #dialogAddActores let-modal>
+    <!--<div class="modal-content">-->
+        <div class="modal-header">
+            <h4 class="modal-title">Agregar Actor</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body" style="padding-left: 40px;padding-right: 40px;">
+
+            <form [formGroup]="formAddActores" (ngSubmit)="onSubmitAddActores()">
+
+                <div class="row">
+                    <div class="form-group col-md-6 col-lg-6">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" formControlName="nombre" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedAddActores && f2.nombre.errors }" />
+                        <div *ngIf="submittedAddActores && f2.nombre.errors" class="invalid-feedback">
+                            <div *ngIf="f2.nombre.errors.required">Campo requerido</div>
+                            <div *ngIf="f2.nombre.errors.maxlength">El Nombre debe contener maximo 70 caracteres</div>
+                            <div *ngIf="f2.nombre.errors.pattern">Solo se permiten letras de a-z de 0-9 y ñ.-_()/%</div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6 col-lg-6">
+                        <label for="nacionalidad">Nacionalidad</label>
+                        <input type="text" formControlName="nacionalidad" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedAddActores && f2.nacionalidad.errors }" />
+                        <div *ngIf="submittedAddActores && f2.nacionalidad.errors" class="invalid-feedback">
+                            <div *ngIf="f2.nacionalidad.errors.required">Campo requerido</div>
+                            <div *ngIf="f2.nacionalidad.errors.maxlength">La Nacionalidad debe contener maximo 50 caracteres</div>
+                            <div *ngIf="f2.nacionalidad.errors.pattern">Solo se permiten letras de a-z de 0-9 y ñ</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group text-center">
+                    <button [disabled]="loading" class="btn btn-success" data-toggle="modal"
+                        data-target="#dialogAddActores">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        Agregar
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" (click)="modal.close('Save click')">Cerrar</button>
+        </div>
+    <!--</div>-->
+</ng-template>
+
+<div class="container spinner">
+    <ngx-loading [show]="loading"></ngx-loading>
+</div>

@@ -5,6 +5,7 @@ import { NgxMaskModule, IConfig } from 'ngx-mask';
 //import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { ToastrModule } from 'ngx-toastr';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 //para la configuración de mask
 const maskConfig: Partial<IConfig> = {
@@ -37,6 +38,7 @@ import { PeliculaComponent } from './pelicula.component';
             positionClass: 'toast-top-right',
             preventDuplicates: true,
         }),
+        NgbModule //Modulo del DatePicker y Modal
     ],
     declarations: [
         LayoutComponent,

@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { ToastrModule } from 'ngx-toastr';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';//para datePicker
 
 //para la configuración de mask
 const maskConfig: Partial<IConfig> = {
@@ -48,7 +49,8 @@ import { HomeComponent } from './components/home';
     ToastrModule.forRoot({
       positionClass: 'toast-top-right',
       preventDuplicates: true,
-    })
+    }),
+    NgbModule, //para el DatePicker y Dialogs
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
