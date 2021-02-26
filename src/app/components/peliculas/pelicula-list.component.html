@@ -1,0 +1,60 @@
+<h1 class="card-header">Listado de Peliculas</h1>
+<br>
+<span class="text-right" *ngIf="user != null && user.Data != null">
+    <a routerLink="add" class="btn btn-success mb-2">Registrar Nueva Pelicula</a>
+</span>
+<br><br>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <div class="form-row">
+        <div class="form-group col-sm-12 col-md-8 col-lg-8">
+            <label>Realizar un búsqueda:</label>
+            <input class="form-control" type="text" formControlName="buscar" placeholder="Buscar" [ngClass]="{ 'is-invalid': submitted && f.buscar.errors }" >
+            <div *ngIf="submitted && f.buscar.errors" class="invalid-feedback">
+                <div *ngIf="f.buscar.errors.maxlength">El campo de bucsar solo permite 50 caracteres</div>
+                <div *ngIf="f.buscar.errors.pattern">Solo se permiten letras de a-z número de 0-9 y estos caracteres
+                    especiales ñáéíóú</div>
+            </div>
+            <span><em>Se puede buscar por todos los campos</em></span>
+        </div>
+        <div class="form-group col-sm-2 col-md-4 col-lg-4" style="padding-top: 32px;">
+            <button class="btn btn-outline-primary spaceBlankForButton" [disabled]="loading" type="submit">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>Buscar
+            </button>
+        </div>
+    </div>
+    <br>
+    <table class="table table-sm table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Titulo</th>
+                <th>Descripción</th>
+                <th>Director</th>
+                <th>Costo</th>
+                <th>Cantidad</th>
+                <th class="text-center">Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of clientes">
+                <td>{{item.Titulo}}</td>
+                <td>{{item.Descripcion}}</td>
+                <td>{{item.Director}}</td>
+                <td>{{item.Costo}}</td>
+                <td>{{item.Cantidad}}</td>
+                <td class="text-center">
+                    <a routerLink="edit/{{item.id}}" class="btn btn-sm btn-primary mr-1" title="Actualizar info de la Pelicula"><i class="far fa-edit"></i></a>
+                    <button (click)="confirmDeletePelicula(item.id)" class="btn btn-sm btn-danger" [disabled]="isDeleting" title="Eliminar Pelicula">
+                        <span *ngIf="isDeleting" class="spinner-border spinner-border-sm"></span>
+                        <span *ngIf="!isDeleting"><i class="far fa-trash-alt"></i></span>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</form>
+
+<div class="container spinner">
+    <ngx-loading [show]="loading" ></ngx-loading>
+</div>

@@ -1,0 +1,16 @@
+<div class="container" *ngIf="user != null">
+    <h1 *ngIf="user.data != null">Hola <strong>{{user.Data.Name}}!</strong></h1>
+</div>
+
+<div class="container body-content mt-5">
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="display-4">Bienvenidos a VideoBlock!</h1>
+            <p class="lead">Tu alquiler de Peliculas preferido!</p>
+            <hr class="my-4">
+            <p>Busca y selecciona tu pelicula preferida...</p>
+            <!-- <a class="btn btn-primary btn-sm" href="#" role="button">Conoce más...</a> -->
+            <a class="btn btn-primary" routerLink="/peliculas" role="button">Conoce más...</a>
+        </div>
+    </div>
+</div>

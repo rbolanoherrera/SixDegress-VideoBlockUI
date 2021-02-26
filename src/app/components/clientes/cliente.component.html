@@ -1,0 +1,122 @@
+<div *ngIf="user != null && user.Data != null">
+    <h1 *ngIf="isAddMode" class="card-header">Agregar Cliente</h1>
+    <h1 *ngIf="!isAddMode" class="card-header">Actualizar Cliente</h1>
+</div>
+<div *ngIf="user == null || user.Data == null">
+    <h1 class="card-header">Registro Online</h1>
+</div>
+
+
+<br>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <div class="form-row">
+        <div class="form-group col-md-4 col-lg-4">
+            <label for="tipoDocumentoId">Tipo de documento</label>
+            <select formControlName="tipoDocumentoId" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.tipoDocumentoId.errors }">
+                <option value="">Seleccione...</option>
+                <option *ngFor="let item of tiposDocumentos" [value]="item.id">{{item.nombre}}</option>
+            </select>
+            <div *ngIf="submitted && f.tipoDocumentoId.errors" class="invalid-feedback">
+                <div *ngIf="f.tipoDocumentoId.errors.required">Campo requerido</div>
+            </div>
+        </div>
+        <div class="form-group col-md-4 col-lg-4">
+            <label for="documento">Documento</label>
+            <input type="text" formControlName="documento" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.documento.errors }" />
+            <div *ngIf="submitted && f.documento.errors" class="invalid-feedback">
+                <div *ngIf="f.documento.errors.required">Campo requerido</div>
+                <div *ngIf="f.documento.errors.maxlength">El Documento debe contener maximo 20 caracteres</div>
+                <div *ngIf="f.documento.errors.pattern">Solo se permiten números de 0-9</div>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col">
+            <label for="nombre1">Primer Nombre</label>
+            <input type="text" formControlName="nombre1" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.nombre1.errors }" />
+            <div *ngIf="submitted && f.nombre1.errors" class="invalid-feedback">
+                <div *ngIf="f.nombre1.errors.required">Campo requerido</div>
+                <div *ngIf="f.nombre1.errors.maxlength">El Primer nombre debe contener maximo 20 caracteres</div>
+                <div *ngIf="f.nombre1.errors.pattern">Solo se permiten letras de a-z</div>
+            </div>
+        </div>
+        <div class="form-group col">
+            <label for="nombre2">Segundo Nombre</label>
+            <input type="text" formControlName="nombre2" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.nombre2.errors }" />
+            <div *ngIf="submitted && f.nombre2.errors" class="invalid-feedback">
+                <div *ngIf="f.nombre2.errors.required">Campo requerido</div>
+                <div *ngIf="f.nombre2.errors.maxlength">El Segundo nombre debe contener maximo 20 caracteres</div>
+                <div *ngIf="f.nombre2.errors.pattern">Solo se permiten letras de a-z</div>
+            </div>
+        </div>
+        <div class="form-group col">
+            <label for="apellido1">Primer Apellido</label>
+            <input type="text" formControlName="apellido1" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.apellido1.errors }" />
+            <div *ngIf="submitted && f.apellido1.errors" class="invalid-feedback">
+                <div *ngIf="f.apellido1.errors.required">Campo requerido</div>
+                <div *ngIf="f.apellido1.errors.maxlength">El Primer apellido debe contener maximo 20 caracteres</div>
+                <div *ngIf="f.apellido1.errors.pattern">Solo se permiten letras de a-z</div>
+            </div>
+        </div>
+        <div class="form-group col">
+            <label for="apellido2">Segundo Apellido</label>
+            <input type="text" formControlName="apellido2" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.apellido2.errors }" />
+            <div *ngIf="submitted && f.apellido2.errors" class="invalid-feedback">
+                <div *ngIf="f.apellido2.errors.required">Campo requerido</div>
+                <div *ngIf="f.apellido2.errors.maxlength">El Segundo apellido debe contener maximo 20 caracteres</div>
+                <div *ngIf="f.apellido2.errors.pattern">Solo se permiten letras de a-z</div>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-3 col-lg-3">
+            <label for="celular">Celular</label>
+            <input type="text" formControlName="celular" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.celular.errors }" />
+            <div *ngIf="submitted && f.celular.errors" class="invalid-feedback">
+                <div *ngIf="f.celular.errors.required">Campo requerido</div>
+                <div *ngIf="f.celular.errors.maxlength">El Celular debe contener maximo 15 caracteres</div>
+                <div *ngIf="f.celular.errors.pattern">Solo se permiten letras de 0-9</div>
+            </div>
+        </div>
+        <div class="form-group col-md-5 col-lg-5">
+            <label for="direccion">Dirección</label>
+            <input type="text" formControlName="direccion" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.direccion.errors }" />
+            <div *ngIf="submitted && f.direccion.errors" class="invalid-feedback">
+                <div *ngIf="f.direccion.errors.required">Campo requerido</div>
+                <div *ngIf="f.direccion.errors.maxlength">La Dirección debe contener maximo 70 caracteres</div>
+                <div *ngIf="f.direccion.errors.pattern">Solo se permiten letras de a-z</div>
+            </div>
+        </div>
+        <div class="form-group col-md-4 col-lg-4">
+            <label for="email">Email</label>
+            <input type="text" formControlName="email" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required">Campo requerido</div>
+                <div *ngIf="f.email.errors.maxlength">El Email debe contener maximo 90 caracteres</div>
+                <div *ngIf="f.email.errors.pattern">Solo se permiten letras de a-z y numeros de 0-9</div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="form-group text-center">
+        <button [disabled]="loading" class="btn btn-success">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Guardar
+        </button>
+        <a routerLink="/clientes" class="btn btn-outline-danger" style="margin-left: 8px;">Cancelar</a>
+    </div>
+</form>
+
+<div class="container spinner">
+    <ngx-loading [show]="loading"></ngx-loading>
+</div>

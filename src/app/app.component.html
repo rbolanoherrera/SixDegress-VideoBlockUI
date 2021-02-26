@@ -1,0 +1,87 @@
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="user != null && user.Data != null">
+  <a class="navbar-brand companyName" routerLink="/" routerLinkActive="active">VideoBlock</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Tablas
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" routerLink="/peliculas" routerLinkActive="active">Peliculas</a>
+          <a class="dropdown-item" routerLink="/clientes" routerLinkActive="active">Clientes</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Reportes
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" routerLink="/reports/reportCashRegister" routerLinkActive="active">Cuadre de Caja</a>
+          <a class="dropdown-item" routerLink="reports/reportSales" routerLinkActive="active">Ventas</a>
+          <a class="dropdown-item" routerLink="/reports/reportProductRemaing" routerLinkActive="active">Restante x Pelicula</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Configuración
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" routerLink="/users" routerLinkActive="active">Usuarios</a>
+        </div>
+      </li>
+    </ul>
+    <ul class="navbar-nav mr-2" *ngIf="user != null && user.Data != null">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{user.Data.Name}}
+        </a>
+        <div class="dropdown-menu user-info" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" routerLink="/products" routerLinkActive="active">Mi cuenta</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" (click)="logout()">Cerrar sesión</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="user == null || user.Data == null">
+  <a class="navbar-brand companyName" routerLink="/" routerLinkActive="active">VideoBlock</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/peliculas" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Peliculas <span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+    <ul class="navbar-nav mr-2" *ngIf="user == null || user.Data == null">
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/clientes/add" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Registrarse <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/account/login" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Iniciar sesión <span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- main app container -->
+<div class="app-container ralfsContainer">
+  <!-- <alert></alert> -->
+  <router-outlet></router-outlet>
+</div>
+
+<!-- credits -->
+<div class="text-center mt-4">
+  <p>
+    &copy;<span>{{fecha}} by</span>&nbsp;
+    <span><a href="https://github.com/rbolanoherrera" target="_blank">Rafael Bolaños Herrera</a></span>
+  </p>
+</div>
