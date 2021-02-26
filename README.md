@@ -24,6 +24,9 @@ Para probar la comunicación con el API. Verifique la Url que se despliega/muest
 
 `src/environments/environment.ts`
 
+## Video de expliación
+Se deja un video de expliación de como clonar los proyectos, de como actualizar el web.config del API para actualizar la BD y una demostración del funcionamiento de la App.
+El video se deja en la carpeta VideoDemo/videoDemo.mp4
 
 ## Ayuda
 
