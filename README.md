@@ -1,27 +1,30 @@
 # VideoBlockUI
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.2.
+Proyecto de prueba tecnica, realizado por Rafael Bolaños Herrera.
 
-## Development server
+Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli) version 11.2.2.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Ejecución del API
 
-## Code scaffolding
+1. Ingresar al directorio/carpeta donde se clone el proyecto
+2. Ejecute el archivo de solución terminado con la extensión.sln
+3. Esto le abrira Visual studio
+4. Una vez abierto el proyecto, presione F5 para ejecutar o de click en el boton verde de Play.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Ejecución del Front-UI
 
-## Build
+1. Ingresar al directorio/carpeta donde se clone el proyecto
+2. Abrir una venta de comandos y ejecutar el comando "npm install" para instalar los modulos de Nodejs
+3. Ejecutar el comando `ng serve`. Esto ejecutara la aplicación que por defecto de Angular se ejecuta el `puerto 4200`.
+4. Abrir un navegador e ingresar a la Url `http://localhost:4200/`. Esto mostrara el Home de la aplicación
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Configuración adicional
 
-## Running unit tests
+Para probar la comunicación con el API. Verifique la Url que se despliega/muestra al ejecutar el API de .Net. En este momento la Url es `http://localhost:62482/`. Verifique esta Url este correctamente especificada en el archivo environment.ts del proyecto de Angular.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+`src/environments/environment.ts`
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Ayuda
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Para recibir ayuda comuniquese al +57 313-2935386.
