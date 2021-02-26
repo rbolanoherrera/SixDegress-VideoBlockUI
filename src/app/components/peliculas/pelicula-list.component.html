@@ -66,7 +66,7 @@
               <h5 class="card-title">{{item.Titulo}}</h5>
               <p class="card-text">{{item.Descripcion}}</p>
               <a routerLink="edit/{{item.Id}}" *ngIf="user != null && user.Data != null" class="btn btn-sm btn-primary">Editar</a>
-              <a href="#" *ngIf="user == null && user.Data == null" class="btn btn-sm btn-primary">Ir a la pagina oficial...</a>
+              <a href="#" *ngIf="user == null || user.Data == null" class="btn btn-sm btn-primary">Ir a la pagina oficial...</a>
             </div>
           </div>
         </div>
